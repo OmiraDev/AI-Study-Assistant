@@ -1,0 +1,8 @@
+node_modules
+.next
+# Environment Variables (සිරිතක් විදිහට කිසිම .env ෆයිල් එකක් යවන්නේ නැහැ)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

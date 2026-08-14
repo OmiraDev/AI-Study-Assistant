@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
   
-  // URL එක අනුව Page Title එක හදාගැනීම
+  
   const getPageTitle = () => {
     if (pathname === "/dashboard") return "Dashboard";
     if (pathname === "/summarizer") return "AI Summarizer";
