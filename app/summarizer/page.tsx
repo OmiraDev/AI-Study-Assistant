@@ -7,14 +7,14 @@ export default function Summarizer() {
   const [summary, setSummary] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // මෙතනට තමයි අපි ඊළඟට Gemini API එක සම්බන්ධ කරන්නේ
+  
   const handleSummarize = async () => {
     if (!inputText) return;
     setIsLoading(true);
-    setSummary(""); // කලින් තිබුණු දේවල් මකා දැමීම
+    setSummary(""); 
     
     try {
-      // අපේ අලුත් API එකට Data යැවීම
+     
       const res = await fetch("/api/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,7 +24,7 @@ export default function Summarizer() {
       const data = await res.json();
 
       if (res.ok) {
-        setSummary(data.summary); // AI එකෙන් එන සාරාංශය පෙන්වීම
+        setSummary(data.summary); 
       } else {
         setSummary("Error: Could not generate summary. " + data.error);
       }
@@ -50,7 +50,7 @@ export default function Summarizer() {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        {/* Input Section (වම් පැත්ත) */}
+        {}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
           <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
             <FileText size={18} /> Original Text
@@ -71,7 +71,7 @@ export default function Summarizer() {
           </button>
         </div>
 
-        {/* Output Section (දකුණු පැත්ත) */}
+        {/* Output Section  */}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
            <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
               Summary Result
