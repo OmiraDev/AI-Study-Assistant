@@ -6,8 +6,7 @@ if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
 }
 
-// Global variable එකක් පාවිච්චි කරන්නේ Next.js වල hot-reloads නිසා 
-// එක දිගට connections හැදෙන එක නවත්වන්නයි.
+
 let cached = (global as any).mongoose;
 
 if (!cached) {

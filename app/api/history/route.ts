@@ -6,7 +6,7 @@ export async function GET() {
   try {
     await connectToDatabase();
     
-    // Database එකෙන් සියලුම සාරාංශ ලබා ගැනීම (අලුත්ම ඒවා මුලින් එන ලෙස)
+    
     const summaries = await Summary.find({ }as any).sort({ createdAt: -1 });
     
     return NextResponse.json({ summaries });
