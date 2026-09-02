@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkles, FileText } from "lucide-react";
 
 export default function Summarizer() {
@@ -7,14 +7,21 @@ export default function Summarizer() {
   const [summary, setSummary] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  
+  // PDF එකෙන් ගත්ත අකුරු localStorage එකෙන් අරගෙන Text Box එකට දාන කොටස
+  useEffect(() => {
+    const savedText = localStorage.getItem("importedText");
+    if (savedText) {
+      setInputText(savedText); 
+      localStorage.removeItem("importedText"); // ඊළඟ පාර Load වෙද්දී හිස්වෙන්න මේක මකනවා
+    }
+  }, []);
+
   const handleSummarize = async () => {
     if (!inputText) return;
     setIsLoading(true);
     setSummary(""); 
     
     try {
-     
       const res = await fetch("/api/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -50,7 +57,6 @@ export default function Summarizer() {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        {}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
           <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
             <FileText size={18} /> Original Text
@@ -74,7 +80,7 @@ export default function Summarizer() {
         {/* Output Section  */}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
            <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-              Summary Result
+             Summary Result
            </h3>
            <div className="w-full h-64 p-4 bg-gray-50 border border-gray-200 rounded-xl overflow-y-auto">
              {summary ? (
