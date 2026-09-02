@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-const pdf = require("pdf-parse"); // import වෙනුවට require භාවිතා කිරීම
+const pdf = require("pdf-parse"); // 
 
 export async function POST(req: Request) {
   try {

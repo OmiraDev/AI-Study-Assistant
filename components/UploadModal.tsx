@@ -40,11 +40,11 @@ export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
         throw new Error(data.error || "Upload failed");
       }
 
-      // වෙන්කරගත්ත අකුරු ටික LocalStorage එකේ Save කරලා Summarizer පිටුවට යැවීම
+      // 
       localStorage.setItem("importedText", data.text);
       
-      onClose(); // Modal එක වැසීම
-      router.push("/summarizer"); // Summarizer පිටුවට ගෙන යාම
+      onClose(); // 
+      router.push("/summarizer"); //
       
     } catch (err: any) {
       setError(err.message);
