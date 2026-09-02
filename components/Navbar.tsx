@@ -1,10 +1,13 @@
 "use client";
-import { Bell, Search, User } from "lucide-react";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import { Bell, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  // 1. useSession එක අනිවාර්යයෙන්ම මෙතන function එක ඇතුළේ තියෙන්න ඕනේ
+  const { data: session } = useSession();
   const pathname = usePathname();
-  
   
   const getPageTitle = () => {
     if (pathname === "/dashboard") return "Dashboard";
@@ -34,9 +37,27 @@ export default function Navbar() {
           <Bell size={22} />
         </button>
         
-        <div className="h-9 w-9 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold border border-blue-200 cursor-pointer">
-          <User size={18} />
-        </div>
+        {/* 2. පරණ User icon එක අයින් කරලා අලුත් Authentication කේතය මෙතනට දැම්මා */}
+        {session ? (
+          <div className="flex items-center gap-4">
+            <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
+              {session.user?.name?.charAt(0).toUpperCase()}
+            </div>
+            <button 
+              onClick={() => signOut({ callbackUrl: '/login' })}
+              className="text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg transition"
+            >
+              Log Out
+            </button>
+          </div>
+        ) : (
+          <Link 
+            href="/login" 
+            className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
+          >
+            Log In
+          </Link>
+        )}
       </div>
     </header>
   );
